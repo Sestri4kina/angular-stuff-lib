@@ -3,14 +3,14 @@
   "description": "Starter Kit for Angular Libraries",
   "version": "0.0.2",
   "scripts": {
-    "clear": "rimraf build && rimraf dist",
-    "copy-typedef": "cpy build/**/*.d.ts dist --parents",
-    "copy-metadata": "cpy build/**/*.metadata.json dist",
-    "copy-package": "cpy package.json dist",
-    "copy": "npm run copy-package && npm run copy-metadata && npm run copy-typedef",
-    "rollup" : "rollup build/stuff-lib.js -o dist/stuff-lib.js",
-    "ngc": "ngc",
     "build": "npm run clear && npm run ngc && npm run rollup && npm run copy",
+    "clear": "rimraf build && rimraf dist",
+    "ngc": "ngc",
+    "rollup" : "rollup build/stuff-lib.js -o dist/stuff-lib.js",
+    "copy": "npm run copy-package && npm run copy-metadata && npm run copy-typedef",
+    "copy-typedef": "cd build && cpy **/*.d.ts ../dist --parents",
+    "copy-metadata": "cd build && cpy **/*.metadata.json ../dist",
+    "copy-package": "cpy dist-package.json dist/package.json",
     "test": "karma start",
     "test-watch": "karma start --singleRun=false --autoWatch=true",
     "prepublish": "ngc && webpack"
@@ -23,6 +23,7 @@
   "license": "MIT",
   "main": "bundles/lib-starter.umd.js",
   "module": "stuff-lib.js",
+  "es2015": "stuff-lib.js",
   "typings": "stuff-lib.d.ts",
   "peerDependencies": {
     "@angular/core": "^2.0.0",
@@ -75,3 +76,4 @@
     "url": "http://myowngit/lib"
   }
 }
+
